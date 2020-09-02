@@ -13,7 +13,6 @@ AutofillEnableToolbarStatusChip
 EnablePasswordsAccountStorage
 GlobalMediaControls
 ImprovedCookieControls
-Metal
 NativeNotifications
 OmniboxDisableInstantExtendedLimit
 OmniboxDocumentProvider
@@ -27,6 +26,7 @@ OmniboxUIExperimentShowSuggestionFavicons
 OmniboxZeroSuggestionsOnNTP
 OmniboxZeroSuggestionsOnNTPRealbox
 OmniboxZeroSuggestionsOnSERP
+
 ParallelDownloading
 PasswordLeakDetection
 QueryInOmnibox
@@ -39,6 +39,7 @@ google-password-manager
 );
 
 CHROME_FLAGS=(
+#Switches list start
 flag-switches-begin
 allow-insecure-localhost
 enable-devtools-experiments
@@ -50,6 +51,8 @@ enable-quic
 show-autofill-signatures
 ignore-gpu-blacklist
 flag-switches-end
+#Switches list end
+
 enable-audio-service-sandbox
 process-per-site
 start-maximized
@@ -61,6 +64,6 @@ function join { local IFS="$1"; shift; echo "$*"; }
 function join_by { local d=$1; shift; echo -n "$1"; shift; printf "%s" "${@/#/$d}"; }
 
 FEATURES=$(join , "${FEATURES_ARRAY[@]}")
-FLAGS=--$(join_by '\n--' "${CHROME_FLAGS[@]}")
+FLAGS=--$(join_by ' --' "${CHROME_FLAGS[@]}")
 
 command "$CHROME" "$FLAGS" --enable-features="$FEATURES"
